@@ -19,9 +19,20 @@ export type CalculatedInvoice = Invoice & {
   interest: number;
   total: number;
   taxRisk: boolean;
+  disallowedAmount: number;
 };
 
 export const todayISO = () => format(new Date(), "yyyy-MM-dd");
+
+export function financialYearFor(dateISO: string) {
+  const date = parseISO(dateISO);
+  const startYear = date.getMonth() >= 3 ? date.getFullYear() : date.getFullYear() - 1;
+  const endYear = startYear + 1;
+  return {
+    financialYear: `${startYear}–${String(endYear).slice(-2)}`,
+    assessmentYear: `${endYear}–${String(endYear + 1).slice(-2)}`,
+  };
+}
 
 export function parseLedgerDate(value: unknown): string | null {
   if (value instanceof Date && isValid(value)) return format(value, "yyyy-MM-dd");
@@ -64,6 +75,7 @@ export function calculateInvoice(
   const daysUntilDue = Math.max(0, differenceInCalendarDays(parseISO(dueDate), parseISO(cutoff)));
   const monthlyRate = (3 * rbiRate / 100) / 12;
   const total = invoice.amount * Math.pow(1 + monthlyRate, daysDelayed / 30.4375);
+  const taxRisk = isMse && daysDelayed > 0;
   return {
     ...invoice,
     creditDays,
@@ -72,7 +84,8 @@ export function calculateInvoice(
     daysUntilDue,
     interest: daysDelayed > 0 ? total - invoice.amount : 0,
     total: daysDelayed > 0 ? total : invoice.amount,
-    taxRisk: isMse && daysDelayed > 0,
+    taxRisk,
+    disallowedAmount: taxRisk ? invoice.amount : 0,
   };
 }
 

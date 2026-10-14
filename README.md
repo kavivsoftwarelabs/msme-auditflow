@@ -1,12 +1,19 @@
 # MSME AuditFlow
 
-A client-side MSME receivables audit workspace for statutory due dates, Section 16 interest estimates, Section 43B(h) flags and audit exports.
+A client-side CA audit working paper utility for MSME statutory appointed-day verification, Section 16 penal interest computation, Section 43B(h) tax disallowance schedules and engagement-stamped audit annexures. TallyPrime Ledger Outstandings columns are auto-mapped, and the interface includes an editable engagement metadata card and statutory-reference basis.
 
 ## Run locally
 
 ```sh
 npm ci
 npm run dev
+```
+
+## Regression tests
+
+```sh
+npm test
+npm run build
 ```
 
 ## GitHub Pages
