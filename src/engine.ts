@@ -9,6 +9,7 @@ export type Invoice = {
   amount: number;
   writtenAgreement: boolean;
   agreedDays: number | null;
+  supplierMseType?: "Micro" | "Small" | "Not MSE";
 };
 
 export type CalculatedInvoice = Invoice & {
@@ -20,6 +21,7 @@ export type CalculatedInvoice = Invoice & {
   total: number;
   taxRisk: boolean;
   disallowedAmount: number;
+  statutoryApplicable: boolean;
 };
 
 export const todayISO = () => format(new Date(), "yyyy-MM-dd");
@@ -65,17 +67,18 @@ export function calculateInvoice(
   invoice: Invoice,
   cutoff: string,
   rbiRate: number,
-  isMse: boolean,
+  statutoryApplicable: boolean,
+  taxDisallowanceApplicable = false,
 ): CalculatedInvoice {
   const creditDays = invoice.writtenAgreement
     ? Math.min(Math.max(Math.trunc(invoice.agreedDays ?? 45), 0), 45)
     : 15;
   const dueDate = format(addDays(parseISO(invoice.invoiceDate), creditDays), "yyyy-MM-dd");
-  const daysDelayed = Math.max(0, differenceInCalendarDays(parseISO(cutoff), parseISO(dueDate)));
-  const daysUntilDue = Math.max(0, differenceInCalendarDays(parseISO(dueDate), parseISO(cutoff)));
+  const daysDelayed = statutoryApplicable ? Math.max(0, differenceInCalendarDays(parseISO(cutoff), parseISO(dueDate))) : 0;
+  const daysUntilDue = statutoryApplicable ? Math.max(0, differenceInCalendarDays(parseISO(dueDate), parseISO(cutoff))) : 0;
   const monthlyRate = (3 * rbiRate / 100) / 12;
   const total = invoice.amount * Math.pow(1 + monthlyRate, daysDelayed / 30.4375);
-  const taxRisk = isMse && daysDelayed > 0;
+  const taxRisk = taxDisallowanceApplicable && statutoryApplicable && daysDelayed > 0;
   return {
     ...invoice,
     creditDays,
@@ -86,6 +89,7 @@ export function calculateInvoice(
     total: daysDelayed > 0 ? total : invoice.amount,
     taxRisk,
     disallowedAmount: taxRisk ? invoice.amount : 0,
+    statutoryApplicable,
   };
 }
 

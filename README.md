@@ -1,6 +1,6 @@
 # MSME AuditFlow
 
-A client-side CA audit working paper utility for MSME statutory appointed-day verification, Section 16 penal interest computation, Section 43B(h) tax disallowance schedules and engagement-stamped audit annexures. TallyPrime Ledger Outstandings columns are auto-mapped, and the interface includes an editable engagement metadata card and statutory-reference basis.
+A client-side CA audit working paper utility with separate, locally retained Trade Payables / Creditors and Trade Receivables / Debtors workflows. The payables view calculates Section 15 appointed days, Section 16 interest payable, and qualifying Section 43B(h) disallowances for registered Micro/Small suppliers; the receivables view calculates interest receivable and provides statutory demand statements without attributing buyer-side tax disallowances to receivables. TallyPrime-style supplier and debtor ledgers are auto-mapped, including optional supplier MSE classifications.
 
 ## Run locally
 
@@ -22,4 +22,4 @@ The production build is configured for the `kavivsoftwarelabs/msme-auditflow` pr
 
 ## Privacy and statutory review
 
-Ledger files are parsed and processed in the browser; the app has no backend or financial-data upload. WhatsApp and email actions open external services only when selected by the user. Confirm supplier registration, payment status, dates, current law and tax treatment with a qualified professional before relying on estimates. The Section 43B(h) flags assume ledger invoices remain unpaid through the selected cutoff date.
+Ledger files are parsed and processed in the browser; the app has no backend or financial-data upload. Payables and receivables ledgers remain separate when switching perspectives. WhatsApp and email actions are available only in the receivables view and open external services only when selected by the user. Confirm supplier registration, payment status, dates, current law and tax treatment with a qualified professional before relying on estimates. The Section 43B(h) flags assume qualifying supplier invoices remain unpaid through the selected cutoff date.
