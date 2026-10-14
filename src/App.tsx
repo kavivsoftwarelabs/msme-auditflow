@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState, type ChangeEvent, type DragEvent, type FormEvent } from "react";
 import {
-  AlertCircle, ArrowDownToLine, ArrowUpRight, BadgeCheck, CalendarDays, Check,
+  AlertCircle, ArrowDownToLine, ArrowUpRight, BadgeCheck, CalendarDays, Check, ExternalLink,
   ChevronRight, Clipboard, FileSpreadsheet, FileText, Filter, Landmark, LockKeyhole,
   Mail, MessageCircle, Plus, Search, Settings2, ShieldCheck, SlidersHorizontal, Sparkles, Upload,
   X,
@@ -432,6 +432,11 @@ function App() {
           </div>
           <div className="method-note"><Filter size={14} /><span>Interest calculated through <b>{formatDate(cutoff)}</b>, using the statutory annual rate and actual delay days.</span></div>
         </aside>
+      </section>
+      <section className="feedback-banner" aria-label="Share feedback">
+        <span className="feedback-icon"><MessageCircle size={17} /></span>
+        <div className="feedback-copy"><strong>Help us make AuditFlow more useful</strong><span>Share feedback on your experience — it takes just a moment.</span></div>
+        <a className="feedback-link" href="https://docs.google.com/forms/d/e/1FAIpQLSd2oONI0bNEyR-0VFMmDTdhc5GzvPoPooJlQt_ZHJfYzzTsbw/viewform" target="_blank" rel="noopener noreferrer">Share feedback <ExternalLink size={14} /></a>
       </section>
       <footer className="page-footer"><span>MSME <b>AuditFlow</b> <span className="footer-separator">·</span> A private workspace for better compliance</span><span><ShieldCheck size={13} /> CLIENT-SIDE ONLY <span className="footer-separator">·</span> NOT LEGAL ADVICE</span></footer>
 

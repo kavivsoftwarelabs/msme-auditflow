@@ -181,6 +181,13 @@ th:nth-child(n+5):nth-child(-n+7) { text-align: right; }
 .method-note { display: flex; align-items: flex-start; gap: 8px; padding: 2px 3px; color: #98a49d; font-size: 8px; line-height: 1.5; }
 .method-note svg { flex: none; margin-top: 1px; color: #8ca294; }
 .method-note b { color: #62766a; }
+.feedback-banner { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 13px 16px; border: 1px solid #e4ece6; border-radius: 9px; background: linear-gradient(105deg, #f1f7f3, #fbfcfb 72%); }
+.feedback-icon { display: grid; place-items: center; width: 32px; height: 32px; flex: none; border-radius: 8px; background: #e4f0e7; color: #4d8060; }
+.feedback-copy { display: flex; flex-direction: column; gap: 3px; }
+.feedback-copy strong { color: #3b5546; font: 700 10px Manrope, sans-serif; }
+.feedback-copy span { color: #84938a; font-size: 9px; }
+.feedback-link { display: inline-flex; align-items: center; gap: 7px; margin-left: auto; padding: 8px 11px; border: 1px solid #dbe8de; border-radius: 6px; background: #fff; color: #34704d; text-decoration: none; font-size: 9px; font-weight: 700; white-space: nowrap; transition: background .15s, border .15s; }
+.feedback-link:hover { background: #edf6ef; border-color: #bfd6c5; }
 .page-footer { display: flex; justify-content: space-between; align-items: center; padding: 23px 0 18px; color: #95a19a; font-size: 8px; }
 .page-footer b { color: #668875; }
 .page-footer > span:last-child { display: flex; align-items: center; gap: 5px; color: #839189; font-size: 7px; font-weight: 700; letter-spacing: .65px; }
@@ -278,6 +285,10 @@ th:nth-child(n+5):nth-child(-n+7) { text-align: right; }
   .table-foot > span:first-child { gap: 3px; }
   .legend-dot { margin-left: 3px; }
   .sidebar { grid-template-columns: 1fr; }
+  .feedback-banner { gap: 9px; padding: 11px; }
+  .feedback-icon { width: 29px; height: 29px; }
+  .feedback-copy span { max-width: 210px; font-size: 8px; line-height: 1.4; }
+  .feedback-link { gap: 5px; padding: 7px; font-size: 8px; }
   .page-footer { align-items: flex-start; flex-direction: column; gap: 9px; padding: 18px 0; }
   .settings-popover { top: 57px; width: min(310px, calc(100vw - 32px)); }
   .modal-backdrop { padding: 12px; }
